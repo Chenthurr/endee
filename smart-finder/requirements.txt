@@ -1,0 +1,2 @@
+pip install requests sentence-transformers streamlit
+streamlit run smart-finder/app.py
