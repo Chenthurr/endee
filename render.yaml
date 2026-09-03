@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: endee
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./infra/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: BUILD_ARCH
+        value: avx2
+      - key: NDD_SERVER_PORT
+        value: "8080"
+      - key: NDD_DATA_DIR
+        value: /data
+      - key: NDD_NUM_THREADS
+        value: "0"
+      - key: NDD_LOG_LEVEL
+        value: info
+      - key: NDD_AUTH_TOKEN
+        sync: false
+    disk:
+      name: endee-data
+      mountPath: /data
+      sizeGB: 10
