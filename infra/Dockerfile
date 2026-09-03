@@ -28,11 +28,12 @@ COPY ./CMakeLists.txt /build_space/CMakeLists.txt
 COPY ./install.sh /build_space/install.sh
 
 # Run build script
-ARG BUILD_ARCH
+ARG BUILD_ARCH=avx2
 ENV BUILD_ARCH=${BUILD_ARCH}
 ARG DEBUG=false
 ENV DEBUG=${DEBUG}
-RUN chmod +x ./install.sh && \
+RUN case "$BUILD_ARCH" in avx2|avx512|neon|sve2) ;; *) echo "Unsupported BUILD_ARCH=$BUILD_ARCH"; exit 1 ;; esac && \
+    chmod +x ./install.sh && \
     if [ "$DEBUG" = "true" ]; then \
         ./install.sh --${BUILD_ARCH} --debug_all --skip-deps; \
     else \
