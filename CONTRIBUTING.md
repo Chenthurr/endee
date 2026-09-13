@@ -10,6 +10,15 @@ contributions and aim to keep the process simple and transparent.
 - Add or update tests for correctness fixes and new behavior.
 - Do not commit build output, generated artifacts, credentials, or local configuration.
 
+## Performance-sensitive changes
+
+For changes affecting indexing, search, storage, serialization, or other hot paths:
+
+- Include a before/after benchmark when practical.
+- State the dataset size and workload used for comparison.
+- Call out any memory or latency trade-offs.
+- Avoid claiming a performance improvement without reproducible measurements.
+
 ## License
 
 By contributing to this repository, you agree that your contributions will be
